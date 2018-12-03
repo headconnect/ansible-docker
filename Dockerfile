@@ -12,11 +12,12 @@
       RUN mkdir /opt/ansible/ -p
       RUN git clone http://github.com/ansible/ansible.git /opt/ansible/ansible
       WORKDIR /opt/ansible/ansible
-      RUN git checkout v2.6.2
+      RUN git checkout v2.7.4
       RUN git submodule update --init
       ENV PATH /opt/ansible/ansible/bin:/bin:/usr/bin:/sbin:/usr/sbin
       ENV PYTHONPATH /opt/ansible/ansible/lib
       ENV ANSIBLE_LIBRARY /opt/ansible/ansible/library
+      RUN pip install openshift
       RUN pip install -t /opt/vault --no-deps ansible-modules-hashivault && \
           cp -r /opt/vault/ansible/* /opt/ansible/ansible/lib/ansible/ && \
           rm -rf /opt/vault
